@@ -1,0 +1,127 @@
+## ─── .NET / MSBuild ───────────────────────────────────────────────────────────
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+.vs/
+_ReSharper*/
+*.DotSettings.user
+
+## ─── NuGet ────────────────────────────────────────────────────────────────────
+packages/
+*.nupkg
+*.snupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+nuget.config.local
+
+## ─── .NET MAUI / Xamarin ──────────────────────────────────────────────────────
+# Android
+*.apk
+*.aab
+*.ap_
+*.dex
+Makefile
+# iOS
+*.ipa
+*.dSYM.zip
+*.dSYM
+# Windows
+*.msix
+*.msixbundle
+*.appx
+*.appxbundle
+# Mac Catalyst
+*.pkg
+# Generated MAUI resources
+Resources/Fonts/*.ttf.bak
+
+## ─── ASP.NET Core ─────────────────────────────────────────────────────────────
+**/wwwroot/lib/
+**/bundleconfig.json.bak
+launchSettings.json.local
+
+## ─── Secrets & Configuration ──────────────────────────────────────────────────
+appsettings.Development.json
+appsettings.Local.json
+appsettings.Secrets.json
+secrets.json
+**/*.pfx
+**/*.p12
+**/*.pem
+**/*.key
+.env
+.env.*
+!.env.example
+
+## ─── IDE / Editors ────────────────────────────────────────────────────────────
+# Visual Studio
+*.ncb
+*.opendb
+*.VC.db
+*.VC.VC.opendb
+*.vsp
+*.vspx
+# Visual Studio Code
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
+# Rider
+.idea/
+*.sln.iml
+# Sublime Text
+*.sublime-workspace
+# Vim
+*.swp
+*.swo
+
+## ─── OS Generated ─────────────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+## ─── Test Results & Coverage ──────────────────────────────────────────────────
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+coverage/
+CoverageReport/
+lcov.info
+
+## ─── Build / Publish Output ───────────────────────────────────────────────────
+publish/
+PublishProfiles/
+**/Properties/PublishProfiles/*.pubxml
+!**/Properties/PublishProfiles/*.pubxml.user
+*.azurePubxml
+*.pubxml
+*.publishproj
+
+## ─── Entity Framework Migrations (keep source, ignore snapshots if generated) ─
+# Uncomment if auto-generating snapshots outside source control:
+# **/Migrations/*ModelSnapshot.cs
+
+## ─── Logs ─────────────────────────────────────────────────────────────────────
+*.log
+logs/
+LogFiles/
+
+## ─── Docker ───────────────────────────────────────────────────────────────────
+.dockerignore.local
+
+## ─── Misc ─────────────────────────────────────────────────────────────────────
+*.cache
+*.bak
+*.tmp
+*.temp
+~$*
