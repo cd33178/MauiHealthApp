@@ -1,5 +1,6 @@
 using HealthApi.Shared.Responses;
 using Microsoft.IdentityModel.Tokens;
+using System.Collections.Concurrent;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -18,7 +19,7 @@ public class TokenService : ITokenService
 {
     private readonly IConfiguration _configuration;
     private readonly ILogger<TokenService> _logger;
-    private static readonly Dictionary<string, (Guid UserId, string Email, DateTime Expiry)> _refreshTokens = new();
+    private static readonly ConcurrentDictionary<string, (Guid UserId, string Email, DateTime Expiry)> _refreshTokens = new();
 
     public TokenService(IConfiguration configuration, ILogger<TokenService> logger)
     {
@@ -39,25 +40,26 @@ public class TokenService : ITokenService
 
         if (tokenInfo.Expiry < DateTime.UtcNow)
         {
-            _refreshTokens.Remove(refreshToken);
+            _refreshTokens.TryRemove(refreshToken, out _);
             return Task.FromResult<TokenResponse?>(null);
         }
 
-        _refreshTokens.Remove(refreshToken);
+        _refreshTokens.TryRemove(refreshToken, out _);
         var newToken = CreateToken(tokenInfo.UserId, tokenInfo.Email);
         return Task.FromResult<TokenResponse?>(newToken);
     }
 
     public Task RevokeTokenAsync(string refreshToken)
     {
-        _refreshTokens.Remove(refreshToken);
+        _refreshTokens.TryRemove(refreshToken, out _);
         return Task.CompletedTask;
     }
 
     private TokenResponse CreateToken(Guid userId, string email)
     {
         var jwtSettings = _configuration.GetSection("JwtSettings");
-        var secretKey = jwtSettings["SecretKey"] ?? "default-secret-key-please-change-in-production";
+        var secretKey = jwtSettings["SecretKey"]
+            ?? throw new InvalidOperationException("JwtSettings:SecretKey is not configured.");
         var issuer = jwtSettings["Issuer"] ?? "HealthApi";
         var audience = jwtSettings["Audience"] ?? "HealthApp";
         var expiryMinutes = int.Parse(jwtSettings["ExpiryMinutes"] ?? "60");

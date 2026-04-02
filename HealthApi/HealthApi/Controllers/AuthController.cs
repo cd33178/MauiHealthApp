@@ -1,4 +1,5 @@
 using HealthApi.Services;
+using HealthApi.Shared.Requests;
 using HealthApi.Shared.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -45,15 +46,4 @@ public class AuthController : ControllerBase
         await _tokenService.RevokeTokenAsync(request.RefreshToken);
         return Ok(ApiResponse<bool>.Ok(true, "Token revoked"));
     }
-}
-
-public class TokenRequest
-{
-    public Guid UserId { get; set; }
-    public string Email { get; set; } = string.Empty;
-}
-
-public class RefreshTokenRequest
-{
-    public string RefreshToken { get; set; } = string.Empty;
 }

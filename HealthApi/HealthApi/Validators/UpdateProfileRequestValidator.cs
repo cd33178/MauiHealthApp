@@ -8,7 +8,7 @@ public class UpdateProfileRequestValidator : AbstractValidator<UpdateProfileRequ
     public UpdateProfileRequestValidator()
     {
         RuleFor(x => x.DateOfBirth)
-            .LessThan(DateTime.Today).When(x => x.DateOfBirth.HasValue)
+            .LessThan(DateTime.UtcNow.Date).When(x => x.DateOfBirth.HasValue)
             .WithMessage("Date of birth must be in the past");
         RuleFor(x => x.WeightKg)
             .InclusiveBetween(1, 500).When(x => x.WeightKg.HasValue)

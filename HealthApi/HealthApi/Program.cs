@@ -58,7 +58,8 @@ try
 
     // JWT Authentication
     var jwtSettings = builder.Configuration.GetSection("JwtSettings");
-    var secretKey = jwtSettings["SecretKey"] ?? "default-secret-key-please-change";
+    var secretKey = jwtSettings["SecretKey"]
+        ?? throw new InvalidOperationException("JwtSettings:SecretKey is not configured.");
     builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         .AddJwtBearer(options =>
         {

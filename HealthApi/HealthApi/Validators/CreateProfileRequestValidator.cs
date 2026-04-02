@@ -9,7 +9,7 @@ public class CreateProfileRequestValidator : AbstractValidator<CreateProfileRequ
     {
         RuleFor(x => x.UserId).NotEmpty().WithMessage("UserId is required");
         RuleFor(x => x.DateOfBirth)
-            .LessThan(DateTime.Today).When(x => x.DateOfBirth.HasValue)
+            .LessThan(DateTime.UtcNow.Date).When(x => x.DateOfBirth.HasValue)
             .WithMessage("Date of birth must be in the past");
         RuleFor(x => x.WeightKg)
             .InclusiveBetween(1, 500).When(x => x.WeightKg.HasValue)
