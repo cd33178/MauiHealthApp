@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MauiHealthApp.ViewModels"
+             x:Class="MauiHealthApp.Views.ProfilePage"
+             x:DataType="vm:ProfileViewModel"
+             Title="{Binding Title}">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <Label Text="Health Profile" FontSize="24" FontAttributes="Bold" />
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
+            <Label Text="{Binding ErrorMessage}" TextColor="Red" IsVisible="{Binding ErrorMessage, Converter={StaticResource IsNotNullOrEmpty}}" />
+
+            <Label Text="Date of Birth" FontAttributes="Bold" />
+            <DatePicker Date="{Binding DateOfBirth}" Format="d" />
+
+            <Label Text="Weight (kg)" FontAttributes="Bold" />
+            <Entry Text="{Binding WeightKg}" Keyboard="Numeric" Placeholder="e.g. 70" />
+
+            <Label Text="Height (cm)" FontAttributes="Bold" />
+            <Entry Text="{Binding HeightCm}" Keyboard="Numeric" Placeholder="e.g. 175" />
+
+            <Label Text="Blood Type" FontAttributes="Bold" />
+            <Entry Text="{Binding BloodType}" Placeholder="e.g. A+" />
+
+            <Label Text="Notes" FontAttributes="Bold" />
+            <Editor Text="{Binding Notes}" Placeholder="Additional health notes..." HeightRequest="100" />
+
+            <Label Text="Medical Conditions" FontSize="18" FontAttributes="Bold" Margin="0,10,0,0" />
+            <CollectionView ItemsSource="{Binding MedicalConditions}" HeightRequest="150">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout Padding="5">
+                            <Label Text="{Binding Name}" FontAttributes="Bold" />
+                            <Label Text="{Binding Severity}" TextColor="Gray" FontSize="12" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Text="Save Profile" Command="{Binding SaveProfileCommand}"
+                    IsEnabled="{Binding IsNotBusy}"
+                    BackgroundColor="#28A745" TextColor="White"
+                    CornerRadius="8" Padding="20,12" />
+
+            <Button Text="Go to Q&amp;A" Command="{Binding NavigateToQuestionsCommand}"
+                    BackgroundColor="#17A2B8" TextColor="White"
+                    CornerRadius="8" Padding="20,12" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MauiHealthApp.ViewModels"
+             x:Class="MauiHealthApp.Views.LoginPage"
+             x:DataType="vm:LoginViewModel"
+             Title="{Binding Title}"
+             BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}">
+    <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
+        <Label Text="🏥 Health App" FontSize="32" FontAttributes="Bold" HorizontalOptions="Center" />
+        <Label Text="Your personal health companion" FontSize="16" HorizontalOptions="Center" TextColor="Gray" />
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HorizontalOptions="Center" />
+        <Label Text="{Binding ErrorMessage}" TextColor="Red" IsVisible="{Binding ErrorMessage, Converter={StaticResource IsNotNullOrEmpty}}" HorizontalOptions="Center" />
+        <Button Text="Login with Microsoft" Command="{Binding LoginCommand}"
+                IsEnabled="{Binding IsNotBusy}"
+                BackgroundColor="#0078D4" TextColor="White"
+                CornerRadius="8" Padding="20,12" />
+    </VerticalStackLayout>
+</ContentPage>
