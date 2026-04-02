@@ -100,7 +100,7 @@ try
     builder.Services.AddScoped<IValidator<CreateQuestionRequest>, CreateQuestionRequestValidator>();
     builder.Services.AddScoped<IValidator<UpdateQuestionRequest>, UpdateQuestionRequestValidator>();
 
-    // CORS
+    // CORS – restrict AllowAnyOrigin in production; set specific origins via configuration
     builder.Services.AddCors(options =>
     {
         options.AddDefaultPolicy(policy =>

@@ -75,10 +75,15 @@ public partial class ProfileViewModel : BaseViewModel
     {
         await ExecuteAsync(async () =>
         {
-            var userId = _authService.UserId ?? Guid.NewGuid();
+            var userId = _authService.UserId;
+            if (userId == null)
+            {
+                ErrorMessage = "You must be logged in to save a profile.";
+                return;
+            }
             var request = new CreateProfileRequest
             {
-                UserId = userId,
+                UserId = userId.Value,
                 DateOfBirth = DateOfBirth,
                 WeightKg = WeightKg,
                 HeightCm = HeightCm,

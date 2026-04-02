@@ -52,12 +52,18 @@ public static class MauiProgram
         // Serilog integration
         builder.Logging.AddSerilog(dispose: true);
 
-        // MSAL
+        // MSAL – configure ClientId, Authority, and RedirectUri via appsettings.json or User Secrets
         var msalSettings = builder.Configuration.GetSection("MsalSettings");
+        var msalClientId = msalSettings["ClientId"]
+            ?? throw new InvalidOperationException("MsalSettings:ClientId is required. Configure it in appsettings.json or User Secrets.");
+        var msalAuthority = msalSettings["Authority"]
+            ?? throw new InvalidOperationException("MsalSettings:Authority is required. Configure it in appsettings.json or User Secrets.");
+        var msalRedirectUri = msalSettings["RedirectUri"]
+            ?? throw new InvalidOperationException("MsalSettings:RedirectUri is required. Configure it in appsettings.json or User Secrets.");
         var msalClient = PublicClientApplicationBuilder
-            .Create(msalSettings["ClientId"] ?? "YOUR_CLIENT_ID")
-            .WithAuthority(msalSettings["Authority"] ?? "https://login.microsoftonline.com/common")
-            .WithRedirectUri(msalSettings["RedirectUri"] ?? "msal://callback")
+            .Create(msalClientId)
+            .WithAuthority(msalAuthority)
+            .WithRedirectUri(msalRedirectUri)
             .Build();
         builder.Services.AddSingleton<IPublicClientApplication>(msalClient);
 
