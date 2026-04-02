@@ -9,7 +9,7 @@
         <VerticalStackLayout Padding="20" Spacing="15">
             <Label Text="Health Profile" FontSize="24" FontAttributes="Bold" />
             <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
-            <Label Text="{Binding ErrorMessage}" TextColor="Red" IsVisible="{Binding ErrorMessage, Converter={x:Null}}" />
+            <Label Text="{Binding ErrorMessage}" TextColor="Red" IsVisible="{Binding ErrorMessage, Converter={StaticResource IsNotNullOrEmpty}}" />
 
             <Label Text="Date of Birth" FontAttributes="Bold" />
             <DatePicker Date="{Binding DateOfBirth}" Format="d" />

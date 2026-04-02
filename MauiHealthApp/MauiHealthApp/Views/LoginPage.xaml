@@ -10,7 +10,7 @@
         <Label Text="🏥 Health App" FontSize="32" FontAttributes="Bold" HorizontalOptions="Center" />
         <Label Text="Your personal health companion" FontSize="16" HorizontalOptions="Center" TextColor="Gray" />
         <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HorizontalOptions="Center" />
-        <Label Text="{Binding ErrorMessage}" TextColor="Red" IsVisible="{Binding ErrorMessage, Converter={x:Null}}" HorizontalOptions="Center" />
+        <Label Text="{Binding ErrorMessage}" TextColor="Red" IsVisible="{Binding ErrorMessage, Converter={StaticResource IsNotNullOrEmpty}}" HorizontalOptions="Center" />
         <Button Text="Login with Microsoft" Command="{Binding LoginCommand}"
                 IsEnabled="{Binding IsNotBusy}"
                 BackgroundColor="#0078D4" TextColor="White"
