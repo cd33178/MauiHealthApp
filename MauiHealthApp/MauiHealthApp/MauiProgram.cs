@@ -12,8 +12,6 @@ using MauiHealthApp.Views;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Identity.Client;
-using Polly;
-using Polly.Extensions.Http;
 using Serilog;
 using System.Reflection;
 
@@ -72,23 +70,15 @@ public static class MauiProgram
         builder.Services.AddSingleton<INavigationService, NavigationService>();
         builder.Services.AddTransient<AuthTokenHandler>();
 
-        // HTTP Client with Polly
+        // HTTP Client with standard resilience (retry + circuit breaker)
         var apiBaseUrl = builder.Configuration["ApiSettings:BaseUrl"] ?? "https://localhost:7001/";
-        var retryPolicy = HttpPolicyExtensions
-            .HandleTransientHttpError()
-            .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
-        var circuitBreakerPolicy = HttpPolicyExtensions
-            .HandleTransientHttpError()
-            .CircuitBreakerAsync(5, TimeSpan.FromSeconds(30));
-
         builder.Services.AddHttpClient("HealthApi", client =>
         {
             client.BaseAddress = new Uri(apiBaseUrl);
             client.Timeout = TimeSpan.FromSeconds(30);
         })
         .AddHttpMessageHandler<AuthTokenHandler>()
-        .AddPolicyHandler(retryPolicy)
-        .AddPolicyHandler(circuitBreakerPolicy);
+        .AddStandardResilienceHandler();
 
         // Local SQLite database
         var dbPath = Path.Combine(FileSystem.AppDataDirectory, "healthapp.db");
