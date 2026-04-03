@@ -2,7 +2,6 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
-
   <!-- Microsoft MAUI -->
   <ItemGroup>
     <PackageVersion Include="Microsoft.Maui.Controls" Version="10.0.51" />
@@ -10,7 +9,6 @@
     <PackageVersion Include="CommunityToolkit.Maui" Version="14.0.1" />
     <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.3.2" />
   </ItemGroup>
-
   <!-- Microsoft Extensions -->
   <ItemGroup>
     <PackageVersion Include="Microsoft.Extensions.Configuration" Version="10.0.5" />
@@ -21,17 +19,15 @@
     <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="10.4.0" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.5" />
   </ItemGroup>
-
   <!-- Microsoft Identity / Auth -->
   <ItemGroup>
     <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.5" />
     <PackageVersion Include="Microsoft.Identity.Client" Version="4.83.3" />
     <PackageVersion Include="Microsoft.Identity.Web" Version="4.7.0" />
   </ItemGroup>
-
   <!-- Serilog -->
   <ItemGroup>
-    <PackageVersion Include="Serilog" Version="4.2.0" />
+    <PackageVersion Include="Serilog" Version="4.3.1" />
     <PackageVersion Include="Serilog.AspNetCore" Version="10.0.0" />
     <PackageVersion Include="Serilog.Enrichers.Environment" Version="3.0.1" />
     <PackageVersion Include="Serilog.Enrichers.Thread" Version="4.0.0" />
@@ -40,7 +36,6 @@
     <PackageVersion Include="Serilog.Sinks.Debug" Version="3.0.0" />
     <PackageVersion Include="Serilog.Sinks.File" Version="7.0.0" />
   </ItemGroup>
-
   <!-- Validation / Mediator / Resilience -->
   <ItemGroup>
     <PackageVersion Include="FluentValidation" Version="11.9.2" />
@@ -48,7 +43,6 @@
     <PackageVersion Include="MediatR" Version="12.4.1" />
     <PackageVersion Include="Polly" Version="8.4.2" />
   </ItemGroup>
-
   <!-- Data Access -->
   <ItemGroup>
     <PackageVersion Include="Dapper" Version="2.1.35" />
@@ -56,12 +50,10 @@
     <PackageVersion Include="sqlite-net-pcl" Version="1.9.172" />
     <PackageVersion Include="SQLitePCLRaw.bundle_green" Version="2.1.10" />
   </ItemGroup>
-
   <!-- API Docs -->
   <ItemGroup>
     <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.9.0" />
   </ItemGroup>
-
   <!-- Testing -->
   <ItemGroup>
     <PackageVersion Include="FluentAssertions" Version="6.12.1" />

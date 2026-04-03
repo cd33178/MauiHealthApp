@@ -132,6 +132,7 @@ public static class MauiProgram
         builder.Services.AddTransient<ProfilePage>();
         builder.Services.AddTransient<QuestionsPage>();
         builder.Services.AddTransient<AppShell>();
+        builder.Services.AddTransient<App>();
 
         return builder.Build();
     }

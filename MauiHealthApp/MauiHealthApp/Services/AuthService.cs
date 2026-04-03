@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Configuration;
 using Microsoft.Identity.Client;
 
 namespace MauiHealthApp.Services;
